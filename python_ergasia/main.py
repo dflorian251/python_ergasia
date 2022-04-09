@@ -1,14 +1,38 @@
 from tkinter import CENTER
+from turtle import back
 import pygame
 
 WIDTH,HEIGHT = 500,700 #platos kai ypsos efarmoghs 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
-def display_screen(teleytaio_pshfio,dioikhsh_is_active,python_is_active):
+def display_screen(teleytaio_pshfio,doihkhsh_is_active,python_is_active):
     if input:
-        if dioikhsh_is_active and (teleytaio_pshfio == 1 or teleytaio_pshfio == 3):
-            background = pygame.image.load("assets/wrologia_programmata/dioikhsh_epixeirhsewn/dioikhsh_monos(1,3).jpg")  
-        screen.blit(background,(0,0))
+        if doihkhsh_is_active:
+            if teleytaio_pshfio=='1' or teleytaio_pshfio=='3':
+                background = pygame.image.load("assets/wrologia_programmata/doihkhsh_epixeirhsewn/dioikhsh_monos(1,3).jpg")  
+                screen.blit(background,(0,0))
+            elif teleytaio_pshfio=='5' or teleytaio_pshfio=='7' or teleytaio_pshfio=='9':
+                background = pygame.image.load("assets/wrologia_programmata/doihkhsh_epixeirhsewn/dioikhsh_monos(5,7,9).jpg")
+                screen.blit(background,(0,0))
+            elif teleytaio_pshfio=='0' or teleytaio_pshfio=='2' or teleytaio_pshfio=='4':
+                background = pygame.image.load("assets/wrologia_programmata/doihkhsh_epixeirhsewn/dioikhsh_zygos(0,2,4).jpg")
+                screen.blit(background,(0,0))
+            elif teleytaio_pshfio=='6'or teleytaio_pshfio=='8':
+                background = pygame.image.load("assets/wrologia_programmata/doihkhsh_epixeirhsewn/dioikhsh_zygos(0,2,4).jpg")
+                screen.blit(background,(0,0))
+        elif python_is_active:
+            if teleytaio_pshfio=='1' or teleytaio_pshfio=='3':
+                background = pygame.image.load("assets/wrologia_programmata/python/python_monos(1,3).jpg")
+                screen.blit(background,(0,0))
+            elif teleytaio_pshfio=='5' or teleytaio_pshfio=='7' or teleytaio_pshfio=='9':
+                background = pygame.image.load("assets/wrologia_programmata/python/python_monos(5,7,9).jpg")
+                screen.blit(background,(0,0))
+            elif teleytaio_pshfio=='0' or teleytaio_pshfio=='2' or teleytaio_pshfio=='4':
+                background = pygame.image.load("assets/wrologia_programmata/python/python_zygos(0,2,4).jpg")
+                screen.blit(background,(0,0))
+            elif teleytaio_pshfio=='6' or teleytaio_pshfio=='8':
+                background = pygame.image.load("assets/wrologia_programmata/python/python_zygos(6,8).jpg")
+                screen.blit(background,(0,0))
     else :
         background = pygame.image.load("assets/final_background.jpg")
         screen.blit(background,(0,0))
@@ -19,7 +43,7 @@ def display_screen(teleytaio_pshfio,dioikhsh_is_active,python_is_active):
         text_surface = base_font.render(user_text,True,(color))
         screen.blit(text_surface,(input_rect.x+7,input_rect.y+7))
         #button dioikhshs epixeirisewn 
-        if dioikhsh_is_active:
+        if doihkhsh_is_active:
             pygame.draw.rect(screen,GREEN,bDioikhshs_rect,1)
         else :
             pygame.draw.rect(screen,BLACK,bDioikhshs_rect,1)
@@ -39,7 +63,7 @@ RED = (255,0,0)
 color = BLACK
 
 #Images
-button_dioikhshs = pygame.image.load("assets/button_dioikhshs.jpg")
+button_dioikhshs = pygame.image.load("assets/button_doihkhshs.jpg")
 button_python = pygame.image.load("assets/button_python.jpg")
 
 #Text
@@ -55,7 +79,7 @@ input_surface = pygame.Surface([200,40])
 input_rect = input_surface.get_rect(center=[250,300])
 
 
-dioikhsh_is_active=False
+doihkhsh_is_active=False
 python_is_active=False
 input = False
 run = True
@@ -67,12 +91,8 @@ while run:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if bPython_rect.collidepoint(event.pos):
                 python_is_active=True
-            else :
-                python_is_active = False
             if bDioikhshs_rect.collidepoint(event.pos):
-                dioikhsh_is_active=True
-            else :
-                dioikhsh_is_active = False
+                doihkhsh_is_active=True
 
         if event.type == pygame.KEYDOWN:
             if len(user_text)>=11:
@@ -80,13 +100,14 @@ while run:
             else :
                 color = BLACK
             if event.key == pygame.K_BACKSPACE:
-                user_text = user_text[:-1]
+                user_text = user_text[-1]
             elif event.key == pygame.K_RETURN :
                 input = True
             else :
                 user_text += event.unicode 
-    display_screen(user_text[-1],dioikhsh_is_active,python_is_active)
+    
 
+    display_screen(user_text[-1],doihkhsh_is_active,python_is_active)
     pygame.display.flip()
 
 
