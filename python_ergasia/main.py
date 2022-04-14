@@ -10,36 +10,36 @@ def display_screen(teleytaio_pshfio,doihkhsh_is_active,python_is_active):
         if doihkhsh_is_active:
             if teleytaio_pshfio=='1' or teleytaio_pshfio=='3':
                 image = pygame.image.load("assets/wrologia_programmata/doihkhsh_epixeirhsewn/dioikhsh_monos(1,3).jpg")  
-                background = pygame.transform.scale(image,(500,656))
+                background = pygame.transform.scale(image,(500,500))
                 screen.blit(background,(0,0))
             elif teleytaio_pshfio=='5' or teleytaio_pshfio=='7' or teleytaio_pshfio=='9':
                 image = pygame.image.load("assets/wrologia_programmata/doihkhsh_epixeirhsewn/dioikhsh_monos(5,7,9).jpg")
-                background = pygame.transform.scale(image,(500,656))
+                background = pygame.transform.scale(image,(500,500))
                 screen.blit(background,(0,0))
             elif teleytaio_pshfio=='0' or teleytaio_pshfio=='2' or teleytaio_pshfio=='4':
                 image = pygame.image.load("assets/wrologia_programmata/doihkhsh_epixeirhsewn/dioikhsh_zygos(0,2,4).jpg")
-                background = pygame.transform.scale(image,(500,656))
+                background = pygame.transform.scale(image,(500,500))
                 screen.blit(background,(0,0))
             elif teleytaio_pshfio=='6'or teleytaio_pshfio=='8':
                 image = pygame.image.load("assets/wrologia_programmata/doihkhsh_epixeirhsewn/dioikhsh_zygos(0,2,4).jpg")
-                background = pygame.transform.scale(image,(500,656))
+                background = pygame.transform.scale(image,(500,500))
                 screen.blit(background,(0,0))
         elif python_is_active:
             if teleytaio_pshfio=='1' or teleytaio_pshfio=='3':
                 image = pygame.image.load("assets/wrologia_programmata/python/python_monos(1,3).jpg")
-                background = pygame.transform.scale(image,(500,656))
+                background = pygame.transform.scale(image,(500,500))
                 screen.blit(background,(0,0))
             elif teleytaio_pshfio=='5' or teleytaio_pshfio=='7' or teleytaio_pshfio=='9':
                 image = pygame.image.load("assets/wrologia_programmata/python/python_monos(5,7,9).jpg")
-                background = pygame.transform.scale(image,(500,656))
+                background = pygame.transform.scale(image,(500,500))
                 screen.blit(background,(0,0))
             elif teleytaio_pshfio=='0' or teleytaio_pshfio=='2' or teleytaio_pshfio=='4':
                 image = pygame.image.load("assets/wrologia_programmata/python/python_zygos(0,2,4).jpg")
-                background = pygame.transform.scale(image,(500,656))
+                background = pygame.transform.scale(image,(500,500))
                 screen.blit(background,(0,0))
             elif teleytaio_pshfio=='6' or teleytaio_pshfio=='8':
                 image = pygame.image.load("assets/wrologia_programmata/python/python_zygos(6,8).jpg")
-                background = pygame.transform.scale(image,(500,656))
+                background = pygame.transform.scale(image,(500,500))
                 screen.blit(background,(0,0))
     else :
         background = pygame.image.load("assets/final_background.jpg")
@@ -108,7 +108,7 @@ while run:
             else :
                 color = BLACK
             if event.key == pygame.K_BACKSPACE:
-                user_text = user_text[-1]
+                user_text = user_text[:-1]
             elif event.key == pygame.K_RETURN :
                 input = True
             else :
