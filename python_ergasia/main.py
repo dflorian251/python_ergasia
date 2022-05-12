@@ -1,11 +1,13 @@
 from tkinter import CENTER
 from turtle import back
 import pygame
+from win10toast import ToastNotifier
+import time
 
 WIDTH,HEIGHT = 500,700 #platos kai ypsos efarmoghs 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
-def display_screen(teleytaio_pshfio,doihkhsh_is_active,python_is_active):
+def display_screen(teleytaio_pshfio,doihkhsh_is_active,python_is_active,notify_is_active):
     if input:
         if doihkhsh_is_active:
             if teleytaio_pshfio=='1' or teleytaio_pshfio=='3':
@@ -44,6 +46,7 @@ def display_screen(teleytaio_pshfio,doihkhsh_is_active,python_is_active):
     else :
         background = pygame.image.load("assets/final_background.jpg")
         screen.blit(background,(0,0))
+        screen.blit(button_notify,(0,605))
         screen.blit(button_dioikhshs,(150,325))
         screen.blit(button_python,(250,325))
         #text input box
@@ -60,8 +63,18 @@ def display_screen(teleytaio_pshfio,doihkhsh_is_active,python_is_active):
             pygame.draw.rect(screen,GREEN,bPython_rect,1)
         else :
             pygame.draw.rect(screen,BLACK,bPython_rect,1)
+        if notify_is_active:
+            pygame.draw.rect(screen,GREEN,bNotify_rect,1)
+        else:
+            pygame.draw.rect(screen,BLACK,bNotify_rect,1)
 
-
+def notify(notify_set,notify_is_active,input,kwstas):
+    if notify_is_active and input:
+        if kwstas:
+            notify=ToastNotifier()
+            notify.show_toast("alarm",'test 241')
+            kwstas=False
+            return kwstas
 
 #Colors
 WHITE=(255,255,255)
@@ -73,6 +86,7 @@ color = BLACK
 #Images
 button_dioikhshs = pygame.image.load("assets/button_dioikhshs.jpg")
 button_python = pygame.image.load("assets/button_python.jpg")
+button_notify = pygame.transform.scale(pygame.image.load("assets/notify_icon.png"),(50,50))
 
 #Text
 base_font = pygame.font.Font(None,40)
@@ -81,14 +95,17 @@ user_text = " "
 #Buttons
 bDioikhshs_rect = button_dioikhshs.get_rect(topleft=[149,325])
 bPython_rect = button_python.get_rect(topleft=[251,325])
+bNotify_rect = button_notify.get_rect(topleft=[0,605])
 
 #Dhmiourgia surface kai rectangle tou pediou pou tha plhktrologitai o AM tou foithth
 input_surface = pygame.Surface([200,40])
 input_rect = input_surface.get_rect(center=[250,300])
 
-
+xrhstos=True
+notify_set=False
 doihkhsh_is_active=False
 python_is_active=False
+notify_is_active=False
 input = False
 run = True
 while run:
@@ -99,8 +116,14 @@ while run:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if bPython_rect.collidepoint(event.pos):
                 python_is_active=True
+            else:
+                python_is_active=False
             if bDioikhshs_rect.collidepoint(event.pos):
                 doihkhsh_is_active=True
+            else:
+                doihkhsh_is_active=False
+            if bNotify_rect.collidepoint(event.pos):
+                notify_is_active=not(notify_is_active)
 
         if event.type == pygame.KEYDOWN:
             if len(user_text)>=11:
@@ -114,11 +137,10 @@ while run:
             else :
                 user_text += event.unicode 
     
-
-    display_screen(user_text[-1],doihkhsh_is_active,python_is_active)
+    display_screen(user_text[-1],doihkhsh_is_active,python_is_active,notify_is_active)
     pygame.display.flip()
-
-
+    xrhstos=notify(notify_set,notify_is_active,input,xrhstos)
+    
 pygame.quit()
 
 #Melh omadas
